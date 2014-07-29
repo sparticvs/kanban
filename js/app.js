@@ -3,19 +3,34 @@
 
     app.controller("TaskController", function($scope) {
 
-        $scope.categories = [
-            {category: "Backlog", state: "backlog", max: -1, class: "list-group-item-info", },
-            {category: "On Deck", state: "ondeck", max: -1, class: "list-group-item-danger"},
-            {category: "In Progress", state: "wip", max: 3, class: "list-group-item-warning"},
-            {category: "Done", state: "done", max: -1, class: "list-group-item-success"}
-        ];
+        if(localStorage["categories"] !== undefined) {
+            $scope.categories = JSON.parse(localStorage["categories"]);
+        } else {
+            $scope.categories = [
+                {category: "Backlog", state: "backlog", max: -1, class: "list-group-item-info", },
+                {category: "On Deck", state: "ondeck", max: -1, class: "list-group-item-danger"},
+                {category: "In Progress", state: "wip", max: 3, class: "list-group-item-warning"},
+                {category: "Done", state: "done", max: -1, class: "list-group-item-success"}
+            ];
+        }
 
-        $scope.tasks = [
-            {task: "Add Data Persistence", state: "backlog"},
-            {task: "Take a screenshot", state: "ondeck"},
-            {task: "Push to GitHub", state: "wip"},
-            {task: "Build かん", state: "done"}
-        ];
+        if(localStorage["tasks"] !== undefined) {
+            $scope.tasks = JSON.parse(localStorage["tasks"]);
+        } else {
+            $scope.tasks = [
+                {task: "Add Data Persistence", state: "backlog"},
+                {task: "Take a screenshot", state: "ondeck"},
+                {task: "Push to GitHub", state: "wip"},
+                {task: "Build かん", state: "done"}
+            ];
+        }
+
+        window.onbeforeunload = function(e) {
+            var sc = angular.element($("body")).scope();
+            localStorage.setItem("categories", JSON.stringify(sc.categories));
+            localStorage.setItem("tasks", JSON.stringify(sc.tasks));
+            return "Are you sure you want to leave?";
+        }
        
         this.toggler = {};
         $scope.newTask = "";
