@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="kanban">
+    <head>
+        <title>かん</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <style>
+            .category {
+                height: 400px;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body ng-controller="TaskController as tc">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">かん</a>
+                </div>
+                <form class="navbar-form navbar-right" role="form" ng-submit="addNewTask()">
+                    <div class="form-group">
+                        <input type="text" ng-model="newTask" placeholder="Task">
+                    </div>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+        </nav>
+        <div class="col-md-3 col-md-offset-9" data-drop="true" jqyoui-droppable="{multiple: true, onDrop: 'deleteTask()'}" ng-model="toggler">
+            <span class="glyphicon glyphicon-trash"></span>
+        </div>
+        <div class="col-md-3" ng-repeat="category in categories">
+            <h3 data-drop="true" jqyoui-droppable="{onDrop: 'toggleState(category)'}" ng-model="toggler">{{category.category}}<span ng-show="category.max !== -1" class="badge pull-right">{{category.max}}</span></h3>
+            <ul class="list-group">
+                <li ng-class="category.class" class="list-group-item" ng-repeat="task in tasks | filter:category.state" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable ng-model="task">
+                    {{task.task}}
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/angular-dragdrop.min.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+    </body>
+</html>
