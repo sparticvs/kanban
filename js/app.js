@@ -78,6 +78,17 @@
             return true;
         };
 
+        $scope.archiveTasks = function() {
+            var stuff = confirm('Are you sure you want to archive everything?');
+            if(stuff) {
+                $scope.tasks.forEach(function(e, i, a) {
+                    if(e.state === 'done') {
+                        e.state = 'archive';
+                    }
+                });
+            }
+        };
+
     });
 
 })();
