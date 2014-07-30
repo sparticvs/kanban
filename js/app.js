@@ -4,7 +4,7 @@
     app.controller("TaskController", function($scope) {
 
         if(localStorage["categories"] !== undefined) {
-            $scope.categories = JSON.parse(localStorage["categories"]);
+            $scope.categories = angular.fromJson(localStorage["categories"]);
         } else {
             $scope.categories = [
                 {category: "Backlog", state: "backlog", max: -1, class: "list-group-item-info", },
@@ -15,7 +15,7 @@
         }
 
         if(localStorage["tasks"] !== undefined) {
-            $scope.tasks = JSON.parse(localStorage["tasks"]);
+            $scope.tasks = angular.fromJson(localStorage["tasks"]);
         } else {
             $scope.tasks = [
                 {task: "Add Data Persistence", state: "backlog"},
@@ -27,8 +27,8 @@
 
         window.onbeforeunload = function(e) {
             var sc = angular.element($("body")).scope();
-            localStorage.setItem("categories", JSON.stringify(sc.categories));
-            localStorage.setItem("tasks", JSON.stringify(sc.tasks));
+            localStorage.setItem("categories", angular.toJson(sc.categories));
+            localStorage.setItem("tasks", angular.toJson(sc.tasks));
             return "Are you sure you want to leave?";
         }
        
