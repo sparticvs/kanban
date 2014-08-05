@@ -39,7 +39,7 @@
                 <h3 class="panel-heading panel-title">{{category.category}}<span ng-show="category.max !== -1" class="badge pull-right">{{category.max}}</span><a class="pull-right" ng-show="category.state === 'done'" ng-click="archiveTasks()"><span class="glyphicon glyphicon-fire"></span></a></h3>
                 <div class="panel-body">
                     <ul class="list-group no-bot-padding">
-                        <li ng-class="category.class" class="list-group-item" ng-repeat="task in tasks | filter:category.state" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable ng-model="task">
+                        <li ng-class="category.class" class="list-group-item" ng-repeat="task in tasks | filter:{state:category.state}" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable ng-model="task">
                             {{task.task}}
                         </li>
                     </ul>
