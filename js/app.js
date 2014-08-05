@@ -1,4 +1,5 @@
 (function(){
+
     var app = angular.module("kanban", ['ngDragDrop']);
 
     app.controller("TaskController", function($scope) {
@@ -31,6 +32,12 @@
             localStorage.setItem("tasks", angular.toJson(sc.tasks));
             return "Are you sure you want to leave?";
         }
+
+        window.setInterval(function() {
+            var sc = angular.element($("body")).scope();
+            localStorage.setItem("categories", angular.toJson(sc.categories));
+            localStorage.setItem("tasks", angular.toJson(sc.tasks));
+        }, 30000);
        
         this.toggler = {};
         $scope.newTask = "";
