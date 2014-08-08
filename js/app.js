@@ -96,6 +96,17 @@
             }
         };
 
+        $scope.edit = function(cat, index) {
+            $("#"+cat+"_"+index+"_text").toggleClass("hidden");
+            $("#"+cat+"_"+index+"_input").toggleClass("hidden");
+        }
+
+        $scope.garbage = function(task) {
+            if(confirm('Delete this task?')) {
+                task.state = "deleted";
+            }
+        }
+
     });
 
 })();
