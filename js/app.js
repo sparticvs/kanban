@@ -26,21 +26,38 @@
             ];
         }
 
+        $scope.doSave = function() {
+            localStorage.setItem("categories", angular.toJson($scope.categories));
+            localStorage.setItem("tasks", angular.toJson($scope.tasks));
+        }
+
+        $scope.buildExport = function() {
+            var exp = {};
+            exp.categories = $scope.categories;
+            exp.tasks = $scope.tasks;
+
+            return angular.toJson(exp);
+        }
+
+        $scope.doLoad = function() {
+            $scope.tasks = angular.fromJson(localStorage["tasks"]);
+            $scope.categories = angular.fromJson(localStorage["categories"]);
+        }
+
         window.onbeforeunload = function(e) {
             var sc = angular.element($("body")).scope();
-            localStorage.setItem("categories", angular.toJson(sc.categories));
-            localStorage.setItem("tasks", angular.toJson(sc.tasks));
+            sc.doSave();
             return "Are you sure you want to leave?";
         }
 
         window.setInterval(function() {
             var sc = angular.element($("body")).scope();
-            localStorage.setItem("categories", angular.toJson(sc.categories));
-            localStorage.setItem("tasks", angular.toJson(sc.tasks));
+            sc.doSave();
         }, 30000);
        
         this.toggler = {};
         $scope.newTask = "";
+        $scope.filename = "";
 
         $scope.toggleState = function(event, ui, category) {
             var filtered = $scope.tasks.filter(function(el) {
@@ -105,6 +122,15 @@
             if(confirm('Delete this task?')) {
                 task.state = "deleted";
             }
+        }
+
+        $scope.exportJson = function() {
+            var data = "text/json;charset=utf-8,"+encodeURIComponent($scope.buildExport());
+            $('<a href="data:' + data + '" download="data.json">Export</a>')[0].click();
+        }
+
+        $scope.importJson = function() {
+            
         }
 
     });

@@ -24,6 +24,7 @@
           <a class="navbar-brand" href="#">かんばん</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" ng-click="exportJson()"><span class="glyphicon glyphicon-export"></span></a></li>
           <li><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
         </ul>
         <form class="navbar-form navbar-right" role="form" ng-submit="addNewTask()">
@@ -49,8 +50,8 @@
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-icons" role="menu">
-                  <li><a href="#" ng-click="edit(category.state, $index)"><span class="glyphicon glyphicon-pencil"></span></li>
-                  <li><a href="#" ng-click="garbage(task)"><span class="glyphicon glyphicon-trash"></span></li>
+                  <li><a href="#" ng-click="edit(category.state, $index)"><span class="glyphicon glyphicon-pencil"></span></a></li>
+                  <li><a href="#" ng-click="garbage(task)"><span class="glyphicon glyphicon-trash"></span></a></li>
                 </ul>
               </span>
             </li>
