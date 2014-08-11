@@ -114,8 +114,12 @@
         };
 
         $scope.edit = function(cat, index) {
-            $("#"+cat+"_"+index+"_text").toggleClass("hidden");
-            $("#"+cat+"_"+index+"_input").toggleClass("hidden");
+            var leader = "#"+cat+"_"+index;
+            $(leader+"_text").toggleClass("hidden");
+            $(leader+"_input").toggleClass("hidden");
+            if(!$(leader+"_input").hasClass("hidden")) {
+                $(leader+"_input").focus();
+            }
         }
 
         $scope.garbage = function(task) {
@@ -131,6 +135,15 @@
 
         $scope.importJson = function() {
             
+        }
+
+        $scope.inputHandler = function(e, cat, index) {
+            switch(e.keyCode) {
+                case 13:
+                case 27:
+                    $scope.edit(cat, index);
+                    break;
+            }
         }
 
     });
