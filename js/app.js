@@ -4,6 +4,8 @@
 
     app.controller("TaskController", function($scope) {
 
+        $scope.dirty_array = false;
+
         if(localStorage["categories"] !== undefined) {
             $scope.categories = angular.fromJson(localStorage["categories"]);
         } else {
@@ -27,8 +29,13 @@
         }
 
         $scope.doSave = function() {
+            if(!$scope.dirty_array) {
+                return;
+            }
             localStorage.setItem("categories", angular.toJson($scope.categories));
             localStorage.setItem("tasks", angular.toJson($scope.tasks));
+
+            $scope.dirty_array = false;
         }
 
         $scope.buildExport = function() {
@@ -47,7 +54,6 @@
         window.onbeforeunload = function(e) {
             var sc = angular.element($("body")).scope();
             sc.doSave();
-            return "Are you sure you want to leave?";
         }
 
         window.setInterval(function() {
@@ -70,12 +76,14 @@
             var ndx = $scope.tasks.map(function(t) {return t.task;}).indexOf(this.toggler.task);
             $scope.tasks.push(this.toggler);
             $scope.tasks.splice(ndx, 1);
+            $scope.dirty_array = true;
             this.toggler = {};
         };
 
         $scope.deleteTask = function(event, ui) {
             var ndx = $scope.tasks.map(function(t) {return t.task;}).indexOf(this.toggler.task);
             $scope.tasks.splice(ndx, 1);
+            $scope.dirty_array = true;
             this.toggler = {};
         };
 
@@ -85,6 +93,7 @@
             taskObj.state = "backlog";
             $scope.newTask = "";
             $scope.tasks.push(taskObj);
+            $scope.dirty_array = true;
         };
 
         $scope.acceptTask = function(el) {
@@ -110,6 +119,7 @@
                         e.state = 'archive';
                     }
                 });
+                $scope.dirty_array = true;
             }
         };
 
@@ -119,12 +129,15 @@
             $(leader+"_input").toggleClass("hidden");
             if(!$(leader+"_input").hasClass("hidden")) {
                 $(leader+"_input").focus();
+            } else {
+                $scope.dirty_array = true;
             }
         }
 
         $scope.garbage = function(task) {
             if(confirm('Delete this task?')) {
                 task.state = "deleted";
+                $scope.dirty_array = true;
             }
         }
 
