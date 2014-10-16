@@ -26,5 +26,9 @@ Submit bug reports on [Github](https://github.com/sparticvs/kanban/issues). Feel
 free to contribute. License is GNU/GPL v2. I will take pull requests, if you do
 wish to commit, please have a detailed commit log.
 
+## Commit Signatures
+Commits should be signed by me. My public key is made available from
+http://popebp.com/sparticvs
+
 ## Donations
 Please send Bitcoins to :moneybag:**1PTVdEyVMcJ2jYk1q4DvWKXsEt9y1mvo5T**
