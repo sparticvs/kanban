@@ -32,8 +32,13 @@
             if(!$scope.dirty_array) {
                 return;
             }
+
+            var tasks = $scope.tasks.filter(function(el) {
+                return el.state !== "deleted";
+            });
+
             localStorage.setItem("categories", angular.toJson($scope.categories));
-            localStorage.setItem("tasks", angular.toJson($scope.tasks));
+            localStorage.setItem("tasks", angular.toJson(tasks));
 
             $scope.dirty_array = false;
         }
@@ -59,7 +64,7 @@
         window.setInterval(function() {
             var sc = angular.element($("body")).scope();
             sc.doSave();
-        }, 30000);
+        }, 2*60*1000);
        
         this.toggler = {};
         $scope.newTask = "";
@@ -69,7 +74,7 @@
             var filtered = $scope.tasks.filter(function(el) {
                 return el.state === category.state;
             });
-            if(filtered.length < category.max || category.max === -1) {
+            if((filtered.length < category.max || category.max === -1)) {
                 this.toggler.state = category.state;
             }
 
