@@ -10,10 +10,10 @@
             $scope.categories = angular.fromJson(localStorage["categories"]);
         } else {
             $scope.categories = [
-                {category: "Backlog", state: "backlog", max: -1, class: "list-group-item-info", },
-                {category: "On Deck", state: "ondeck", max: -1, class: "list-group-item-danger"},
-                {category: "In Progress", state: "wip", max: 3, class: "list-group-item-warning"},
-                {category: "Done", state: "done", max: -1, class: "list-group-item-success"}
+                {category: "Backlog", state: "backlog", max: -1, class: "list-group-item-info", showfilter: true},
+                {category: "On Deck", state: "ondeck", max: -1, class: "list-group-item-danger", showfilter: false},
+                {category: "In Progress", state: "wip", max: 3, class: "list-group-item-warning", showfilter: false},
+                {category: "Done", state: "done", max: -1, class: "list-group-item-success", showfilter: false}
             ];
         }
 
