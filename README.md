@@ -5,6 +5,10 @@ This is a simple Kanban tool that is written mostly in Javascript. This
 will be my first Node.JS application in the end, once I get around to the
 backend system.
 
+## What's Different
+Migrated Angular.JS for the interface. It makes much more sense than what I
+was doing.
+
 ## Using
 Currently this tool runs locally only. It requires that you use a browser
 that supports CSS3 and HTML5. To use it download the latest ZIP package
