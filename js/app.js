@@ -41,7 +41,7 @@
             localStorage.setItem("tasks", angular.toJson(tasks));
 
             $scope.dirty_array = false;
-        }
+        };
 
         $scope.buildExport = function() {
             var exp = {};
@@ -49,17 +49,17 @@
             exp.tasks = $scope.tasks;
 
             return angular.toJson(exp);
-        }
+        };
 
         $scope.doLoad = function() {
             $scope.tasks = angular.fromJson(localStorage["tasks"]);
             $scope.categories = angular.fromJson(localStorage["categories"]);
-        }
+        };
 
         window.onbeforeunload = function(e) {
             var sc = angular.element($("body")).scope();
             sc.doSave();
-        }
+        };
 
         window.setInterval(function() {
             var sc = angular.element($("body")).scope();
@@ -74,6 +74,7 @@
             var filtered = $scope.tasks.filter(function(el) {
                 return el.state === category.state;
             });
+          
             if((filtered.length < category.max || category.max === -1)) {
                 this.toggler.state = category.state;
             }
@@ -137,23 +138,32 @@
             } else {
                 $scope.dirty_array = true;
             }
-        }
+        };
+
+        $scope.showAddLabelModal = function(task) {
+            var taskObj = task;
+            $('#addLabelBtn').on('click', function() {
+                // Add the Label to the Task Object
+            });
+
+            $('#addLabelModal').modal('show');
+        };
 
         $scope.garbage = function(task) {
             if(confirm('Delete this task?')) {
                 task.state = "deleted";
                 $scope.dirty_array = true;
             }
-        }
+        };
 
         $scope.exportJson = function() {
             var data = "text/json;charset=utf-8,"+encodeURIComponent($scope.buildExport());
             $('<a href="data:' + data + '" download="data.json">Export</a>')[0].click();
-        }
+        };
 
         $scope.importJson = function() {
             
-        }
+        };
 
         $scope.inputHandler = function(e, cat, index) {
             switch(e.keyCode) {
@@ -162,7 +172,7 @@
                     $scope.edit(cat, index);
                     break;
             }
-        }
+        };
 
     });
 

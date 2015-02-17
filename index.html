@@ -54,11 +54,33 @@
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-icons" role="menu">
+                  <li><a href="#" ng-click="showAddLabelModal(task)"><span class="glyphicon glyphicon-tags"></span></a></li>
                   <li><a href="#" ng-click="garbage(task)"><span class="glyphicon glyphicon-trash"></span></a></li>
                 </ul>
               </span>
             </li>
           </ul>
+        </div>
+      </div>
+    </div>
+    <div id="addLabelModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"
+                                                  aria-label="Close"><span
+                                                  aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Add Label</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <input type="text">
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="addLabelBtn" type="button" class="btn btn-primary">Add Label</button>
+          </div>
         </div>
       </div>
     </div>
